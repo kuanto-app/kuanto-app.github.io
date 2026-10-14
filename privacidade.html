@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Política de Privacidade — Kuanto</title>
+<style>
+  :root { --teal:#0F766E; --ink:#1f2937; --muted:#6b7280; --line:#e5e7eb; }
+  body { margin:0; font:16px/1.6 -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; color:var(--ink); background:#fff; }
+  main { max-width:760px; margin:0 auto; padding:32px 16px 64px; }
+  h1 { color:var(--teal); font-size:1.7rem; margin-bottom:.25rem; }
+  h2 { font-size:1.15rem; margin-top:2rem; border-bottom:1px solid var(--line); padding-bottom:.25rem; }
+  table { border-collapse:collapse; width:100%; font-size:.92rem; display:block; overflow-x:auto; }
+  th, td { border:1px solid var(--line); padding:8px 10px; text-align:left; vertical-align:top; }
+  th { background:#f0fdfa; }
+  a { color:var(--teal); }
+  code { font-size:.9em; background:#f3f4f6; padding:0 3px; border-radius:3px; }
+  footer { margin-top:3rem; color:var(--muted); font-size:.85rem; }
+</style>
+</head>
+<body>
+<main>
+<h1>Política de Privacidade — Kuanto</h1>
+<p><strong>Última atualização:</strong> 14 de outubro de 2026</p>
+<p>O Kuanto é um aplicativo que lê o QR Code de notas fiscais de consumidor (NFC-e) de supermercados e usa os preços dessas notas para mostrar onde a sua lista de compras sai mais barata. Esta política explica, em linguagem direta, quais dados o app trata, por quê, onde ficam e como você pode apagá-los, nos termos da Lei Geral de Proteção de Dados (LGPD, Lei 13.709/2018).</p>
+<p><strong>Controlador:</strong> George Rocha (desenvolvedor independente, pessoa física) — contato e encarregado (DPO): <strong>georgebezs@gmail.com</strong>.</p>
+
+<h2>1. Dados que tratamos</h2>
+<table>
+<thead>
+<tr><th>Dado</th><th>Quando</th><th>Para quê</th><th>Onde fica / por quanto tempo</th></tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>E-mail e senha</strong></td>
+<td>ao criar a conta (o e-mail precisa ser confirmado pelo link que enviamos)</td>
+<td>identificar você e proteger seus dados</td>
+<td>Supabase Auth; a senha é guardada com hash, nunca em texto puro. Enquanto a conta existir</td>
+</tr>
+<tr>
+<td><strong>Conta Google</strong> (se você escolher "Continuar com Google")</td>
+<td>ao entrar com o Google</td>
+<td>identificar você sem criar uma senha no Kuanto</td>
+<td>o Google nos envia nome, e-mail, foto de perfil (endereço da imagem) e o identificador da sua conta Google; ficam no Supabase Auth enquanto a conta existir. O Kuanto <strong>não</strong> recebe sua senha do Google nem acesso a outros dados da sua conta (Gmail, Drive, contatos)</td>
+</tr>
+<tr>
+<td><strong>Suas notas fiscais</strong>: chave de acesso; loja (CNPJ, nome, endereço); data; total; itens (descrição, código de barras/EAN, quantidade, preço unitário)</td>
+<td>ao escanear um QR Code ou fotografar uma nota</td>
+<td>montar o seu histórico de compras e, se a nota for verificada na SEFAZ, a base de preços</td>
+<td>banco de dados no Supabase, <strong>vinculado à sua conta</strong>. Enquanto a conta existir</td>
+</tr>
+<tr>
+<td><strong>Arquivo da nota na SEFAZ</strong> (XML) e <strong>conteúdo do QR Code</strong></td>
+<td>ao consultar a nota na SEFAZ</td>
+<td>conferir que a nota é verdadeira e reprocessá-la se preciso</td>
+<td>Supabase, vinculado à sua conta. <strong>Antes de guardar</strong>, removemos do XML o bloco do destinatário (<code>&lt;dest&gt;</code>, onde ficam CPF e nome do consumidor) e do QR Code o parâmetro de CPF do consumidor (<code>cDest</code>)</td>
+</tr>
+<tr>
+<td><strong>Listas de compras</strong></td>
+<td>quando você cria uma lista</td>
+<td>comparar preços</td>
+<td>Supabase, vinculadas à sua conta. Enquanto a conta existir</td>
+</tr>
+<tr>
+<td><strong>Localização do aparelho</strong> (aproximada ou precisa, conforme a permissão que você der)</td>
+<td>só com o app aberto, ao comparar mercados</td>
+<td>ordenar os mercados perto de você</td>
+<td>enviada ao servidor apenas no pedido de comparação e <strong>não é armazenada</strong>. Nunca é usada como posição de uma loja</td>
+</tr>
+<tr>
+<td><strong>Texto reconhecido na foto da nota</strong> (modo foto)</td>
+<td>se o QR Code não puder ser lido</td>
+<td>extrair os itens da nota</td>
+<td>a foto é lida <strong>no próprio aparelho</strong> (ML Kit) e <strong>não sai do celular</strong>; só o texto reconhecido vai ao servidor, é processado na hora e <strong>não é guardado</strong> (os itens extraídos entram na sua nota)</td>
+</tr>
+<tr>
+<td><strong>Preferências</strong> (raio de busca, custo por km, validade dos preços)</td>
+<td>ao ajustar no Perfil</td>
+<td>personalizar a comparação</td>
+<td><strong>só no seu aparelho</strong></td>
+</tr>
+</tbody>
+</table>
+
+<h3>O que <strong>não</strong> guardamos e não coletamos</h3>
+<ul>
+<li><strong>CPF.</strong> O CPF nunca é armazenado. Ele é retirado do XML e do QR Code antes de guardar. No modo foto, o texto enviado ao servidor pode conter a linha "CONSUMIDOR CPF" impressa na nota; esse texto é lido em memória só para extrair os itens e é descartado, sem ser armazenado.</li>
+<li><strong>Fotos.</strong> Nenhuma foto é enviada ao servidor.</li>
+<li><strong>Localização em segundo plano.</strong> O app só usa a localização enquanto está aberto, e ela não é guardada.</li>
+<li>Contatos, fotos da galeria, outros apps instalados, identificadores de publicidade.</li>
+<li>Não há anúncios, nem ferramentas de análise de uso (analytics) ou de relatório de falhas (crash) de terceiros. <strong>Não vendemos dados.</strong></li>
+</ul>
+
+<h2>2. Base comum de preços</h2>
+<p>Os preços das notas <strong>verificadas na SEFAZ</strong> entram numa base compartilhada e <strong>agregada</strong>: preço médio e mínimo por loja e por produto. É ela que permite comparar mercados. Outros usuários veem só esses preços agregados por loja e produto — <strong>nunca quem comprou o quê</strong>, nem seu e-mail, suas notas, suas listas ou sua localização.</p>
+<p>Cada usuário só consegue ler as próprias notas (regras de segurança por linha no banco de dados, RLS). Itens de notas não verificadas (por exemplo, lidos de foto) ficam apenas no seu histórico e não entram na base comum.</p>
+
+<h2>3. De onde vem a posição das lojas</h2>
+<p>A posição de cada loja no mapa é obtida pelo <strong>endereço público da loja impresso na nota</strong>, consultado no serviço OpenStreetMap Nominatim. Ao Nominatim é enviado <strong>apenas o endereço da loja</strong> — nenhum dado seu. A sua localização <strong>nunca</strong> é usada como posição da loja.</p>
+
+<h2>4. Notas em contingência</h2>
+<p>Se a nota ainda não estiver disponível na SEFAZ (emitida em contingência), guardamos a chave de acesso e o servidor consulta a SEFAZ de novo automaticamente por cerca de 3 dias (após 15 min, 1 h, 6 h, 24 h e 48 h). Depois disso, a consulta automática é encerrada.</p>
+
+<h2>5. Com quem os dados são compartilhados</h2>
+<ul>
+<li><strong>Supabase</strong> (operador: banco de dados, autenticação e funções de servidor). Servidores nos <strong>Estados Unidos</strong> (região East US – Ohio). Política: <a href="https://supabase.com/privacy">supabase.com/privacy</a>.</li>
+<li><strong>SEFAZ</strong> (Secretaria da Fazenda do estado emissor): para obter os dados da nota, o servidor do Kuanto consulta o site público da SEFAZ com os dados do próprio QR Code (chave de acesso e parâmetros impressos nele). Aceitamos apenas endereços de SEFAZ em <code>*.gov.br</code>.</li>
+<li><strong>Google</strong> (só se você usar "Continuar com Google"): faz o login e nos informa nome, e-mail, foto de perfil e o identificador da conta. O Google fica sabendo que você entrou no Kuanto. Política: <a href="https://policies.google.com/privacy">policies.google.com/privacy</a>.</li>
+<li><strong>OpenStreetMap Nominatim</strong>: recebe apenas o endereço público da loja (ver seção 3).</li>
+<li><strong>OpenStreetMap (mapas)</strong>: as imagens do mapa são baixadas pelo app dos servidores do OpenStreetMap, que, como qualquer site, recebem o endereço IP do aparelho e a região do mapa exibida. Política: <a href="https://wiki.osmfoundation.org/wiki/Privacy_Policy">osmfoundation.org/wiki/Privacy_Policy</a>.</li>
+</ul>
+<p>Não vendemos, alugamos nem cedemos dados pessoais para publicidade.</p>
+
+<h2>6. Bases legais (LGPD, art. 7º)</h2>
+<ul>
+<li><strong>Execução de contrato</strong> (art. 7º, V) — prestar o serviço que você pediu ao criar a conta: conta e login, guardar suas notas e listas, consultar a SEFAZ, comparar preços com base na sua localização.</li>
+<li><strong>Legítimo interesse</strong> (art. 7º, IX) — formar a base agregada de preços a partir das notas verificadas, sem identificar quem comprou, e manter a segurança do serviço.</li>
+<li><strong>Cumprimento de obrigação legal</strong> (art. 7º, II) — quando a lei exigir guardar ou fornecer informações a autoridades.</li>
+</ul>
+
+<h2>7. Transferência internacional</h2>
+<p>Os dados guardados ficam nos servidores do Supabase nos Estados Unidos. A transferência é necessária para executar o serviço que você contratou (LGPD, art. 33, IX, combinado com o art. 7º, V). O tráfego é sempre criptografado (HTTPS).</p>
+
+<h2>8. Por quanto tempo guardamos</h2>
+<ul>
+<li>Conta, notas (com itens, XML e QR sem CPF) e listas: <strong>enquanto a conta existir</strong>. Ao excluir a conta, tudo é apagado na hora (ver seção 9).</li>
+<li>Preços na base comum: são calculados a partir das notas verificadas guardadas. Quando a conta é excluída, os preços das notas dela <strong>saem da base comum</strong>.</li>
+<li>Localização e texto do modo foto: não são guardados.</li>
+<li>Preferências: no seu aparelho, até você desinstalar o app ou limpar os dados dele.</li>
+</ul>
+
+<h2 id="excluir">9. Como excluir sua conta e seus dados</h2>
+<ul>
+<li><strong>No app:</strong> Perfil → <strong>"Excluir minha conta"</strong>. Apaga imediatamente a conta (e-mail, senha ou vínculo com o Google, nome e foto), todas as suas notas e itens e suas listas; os preços dessas notas saem da base comum. Não dá para desfazer.</li>
+<li><strong>Pela web / por e-mail</strong> (se você não tiver mais o app): siga as instruções em <a href="excluir-conta.html">excluir-conta.html</a> — envie um e-mail para <strong>georgebezs@gmail.com</strong>, com o assunto <strong>"Excluir conta Kuanto"</strong>, a partir do e-mail da conta. O pedido é concluído em até 30 dias.</li>
+</ul>
+
+<h2>10. Seus direitos (LGPD, art. 18)</h2>
+<p>Você pode pedir, a qualquer momento, por <strong>georgebezs@gmail.com</strong>: confirmação de que tratamos seus dados; acesso; correção de dados incompletos, inexatos ou desatualizados; anonimização, bloqueio ou eliminação de dados desnecessários ou excessivos; portabilidade; informação sobre com quem compartilhamos; e eliminação dos dados. Respondemos em até 15 dias (pedidos de exclusão por e-mail: até 30 dias). Você também pode reclamar à Autoridade Nacional de Proteção de Dados (ANPD) — <a href="https://www.gov.br/anpd">gov.br/anpd</a>.</p>
+
+<h2>11. Segurança</h2>
+<p>Todo o tráfego usa HTTPS. A senha é guardada com hash; no login com o Google não existe senha no Kuanto. No banco de dados, regras de segurança por linha (RLS) fazem com que cada usuário só leia as próprias notas e listas; a gravação de notas é feita apenas pelas funções do servidor.</p>
+
+<h2>12. Crianças e adolescentes</h2>
+<p>O Kuanto é destinado a maiores de 18 anos e não coleta intencionalmente dados de crianças ou adolescentes.</p>
+
+<h2>13. Alterações</h2>
+<p>Se esta política mudar, a nova versão será publicada neste mesmo endereço, com a data de atualização revista.</p>
+
+<h2>14. Contato</h2>
+<p>Dúvidas ou pedidos sobre seus dados: <strong>georgebezs@gmail.com</strong>.</p>
+
+<footer>Kuanto · <a href="index.html">início</a> · <a href="excluir-conta.html">excluir conta</a> · <a href="mailto:georgebezs@gmail.com">georgebezs@gmail.com</a></footer>
+</main>
+</body>
+</html>
