@@ -49,7 +49,7 @@
 </a>
 <main>
 <h1>Política de Privacidade — Kuanto</h1>
-<p><strong>Última atualização:</strong> 14 de outubro de 2026</p>
+<p><strong>Última atualização:</strong> 16 de outubro de 2026</p>
 <p>O Kuanto é um aplicativo que lê o QR Code de notas fiscais de consumidor (NFC-e) de supermercados e usa os preços dessas notas para mostrar onde a sua lista de compras sai mais barata. Esta política explica, em linguagem direta, quais dados o app trata, por quê, onde ficam e como você pode apagá-los, nos termos da Lei Geral de Proteção de Dados (LGPD, Lei 13.709/2018).</p>
 <p><strong>Controlador:</strong> George Rocha (desenvolvedor independente, pessoa física) — contato e encarregado (DPO): <strong>georgebezs@gmail.com</strong>.</p>
 
@@ -121,7 +121,7 @@
 
 <h2>2. Base comum de preços</h2>
 <p>Os preços das notas <strong>verificadas na SEFAZ</strong> entram numa base compartilhada e <strong>agregada</strong>: preço médio e mínimo por loja e por produto. É ela que permite comparar mercados. Outros usuários veem só esses preços agregados por loja e produto — <strong>nunca quem comprou o quê</strong>, nem seu e-mail, suas notas, suas listas ou sua localização.</p>
-<p>Cada usuário só consegue ler as próprias notas (regras de segurança por linha no banco de dados, RLS). Itens de notas não verificadas (por exemplo, lidos de foto) ficam apenas no seu histórico e não entram na base comum.</p>
+<p>Cada usuário só consegue ler as notas que ele mesmo escaneou (regras de segurança por linha no banco de dados, RLS). Se duas pessoas escanearem o mesmo cupom, as duas veem essa nota no histórico. Itens de notas não verificadas (por exemplo, lidos de foto) ficam apenas no seu histórico e não entram na base comum.</p>
 
 <h2>3. De onde vem a posição das lojas</h2>
 <p>A posição de cada loja no mapa é obtida pelo <strong>endereço público da loja impresso na nota</strong>, consultado no serviço OpenStreetMap Nominatim. Ao Nominatim é enviado <strong>apenas o endereço da loja</strong> — nenhum dado seu. A sua localização <strong>nunca</strong> é usada como posição da loja.</p>
@@ -159,7 +159,7 @@
 
 <h2 id="excluir">9. Como excluir sua conta e seus dados</h2>
 <ul>
-<li><strong>No app:</strong> Perfil → <strong>"Excluir minha conta"</strong>. Apaga imediatamente a conta (e-mail, senha ou vínculo com o Google, nome e foto), todas as suas notas e itens e suas listas; os preços dessas notas saem da base comum. Não dá para desfazer.</li>
+<li><strong>No app:</strong> Perfil → <strong>"Excluir minha conta"</strong>. Apaga imediatamente a conta (e-mail, senha ou vínculo com o Google, nome e foto), as notas que você registrou primeiro (com os itens) e suas listas; os preços dessas notas saem da base comum. Uma nota que outra pessoa registrou antes de você continua na conta dela (sai só o seu vínculo); uma nota que você registrou primeiro sai também do histórico de quem a escaneou depois. Não dá para desfazer.</li>
 <li><strong>Pela web / por e-mail</strong> (se você não tiver mais o app): siga as instruções em <a href="excluir-conta.html">excluir-conta.html</a> — envie um e-mail para <strong>georgebezs@gmail.com</strong>, com o assunto <strong>"Excluir conta Kuanto"</strong>, a partir do e-mail da conta. O pedido é concluído em até 30 dias.</li>
 </ul>
 
@@ -167,7 +167,7 @@
 <p>Você pode pedir, a qualquer momento, por <strong>georgebezs@gmail.com</strong>: confirmação de que tratamos seus dados; acesso; correção de dados incompletos, inexatos ou desatualizados; anonimização, bloqueio ou eliminação de dados desnecessários ou excessivos; portabilidade; informação sobre com quem compartilhamos; e eliminação dos dados. Respondemos em até 15 dias (pedidos de exclusão por e-mail: até 30 dias). Você também pode reclamar à Autoridade Nacional de Proteção de Dados (ANPD) — <a href="https://www.gov.br/anpd">gov.br/anpd</a>.</p>
 
 <h2>11. Segurança</h2>
-<p>Todo o tráfego usa HTTPS. A senha é guardada com hash; no login com o Google não existe senha no Kuanto. No banco de dados, regras de segurança por linha (RLS) fazem com que cada usuário só leia as próprias notas e listas; a gravação de notas é feita apenas pelas funções do servidor.</p>
+<p>Todo o tráfego usa HTTPS. A senha é guardada com hash; no login com o Google não existe senha no Kuanto. No banco de dados, regras de segurança por linha (RLS) fazem com que cada usuário só leia as notas que escaneou e as próprias listas; a gravação de notas é feita apenas pelas funções do servidor.</p>
 
 <h2>12. Crianças e adolescentes</h2>
 <p>O Kuanto é destinado a maiores de 18 anos e não coleta intencionalmente dados de crianças ou adolescentes.</p>
