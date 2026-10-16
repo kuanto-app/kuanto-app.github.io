@@ -121,7 +121,7 @@
 
 <h2>2. Base comum de preços</h2>
 <p>Os preços das notas <strong>verificadas na SEFAZ</strong> entram numa base compartilhada e <strong>agregada</strong>: preço médio e mínimo por loja e por produto. É ela que permite comparar mercados. Outros usuários veem só esses preços agregados por loja e produto — <strong>nunca quem comprou o quê</strong>, nem seu e-mail, suas notas, suas listas ou sua localização.</p>
-<p>Cada usuário só consegue ler as notas que ele mesmo escaneou (regras de segurança por linha no banco de dados, RLS). Se duas pessoas escanearem o mesmo cupom, as duas veem essa nota no histórico. Itens de notas não verificadas (por exemplo, lidos de foto) ficam apenas no seu histórico e não entram na base comum.</p>
+<p>Cada usuário só consegue ler as notas que ele mesmo escaneou (regras de segurança por linha no banco de dados, RLS). Se duas pessoas escanearem a mesma nota fiscal, as duas veem essa nota no histórico. Itens de notas não verificadas (por exemplo, lidos de foto) ficam apenas no seu histórico e não entram na base comum.</p>
 
 <h2>3. De onde vem a posição das lojas</h2>
 <p>A posição de cada loja no mapa é obtida pelo <strong>endereço público da loja impresso na nota</strong>, consultado no serviço OpenStreetMap Nominatim. Ao Nominatim é enviado <strong>apenas o endereço da loja</strong> — nenhum dado seu. A sua localização <strong>nunca</strong> é usada como posição da loja.</p>
