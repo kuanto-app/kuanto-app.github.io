@@ -130,7 +130,7 @@
 <p>Cada usuário só consegue ler as notas que ele mesmo escaneou (regras de segurança por linha no banco de dados, RLS). Se duas pessoas escanearem a mesma nota fiscal, as duas veem essa nota no histórico. Itens de notas não verificadas (por exemplo, lidos de foto) ficam apenas no seu histórico e não entram na base comum.</p>
 
 <h2>3. De onde vem a posição das lojas</h2>
-<p>A posição de cada loja no mapa é obtida pelo <strong>endereço público da loja impresso na nota</strong>, consultado no serviço OpenStreetMap Nominatim. Ao Nominatim é enviado <strong>apenas o endereço da loja</strong> — nenhum dado seu. A sua localização <strong>nunca</strong> é usada como posição da loja.</p>
+<p>A posição de cada loja no mapa é obtida pelo <strong>endereço público da loja impresso na nota</strong>, consultado no serviço Photon (da Komoot, com dados do OpenStreetMap) e, se ele não achar, na BrasilAPI pelo CEP. A esses serviços é enviado <strong>apenas o endereço da loja</strong> — nenhum dado seu. A sua localização <strong>nunca</strong> é usada como posição da loja.</p>
 
 <h2>4. Notas em contingência</h2>
 <p>Se a nota ainda não estiver disponível na SEFAZ (emitida em contingência), guardamos a chave de acesso e o servidor consulta a SEFAZ de novo automaticamente por cerca de 3 dias (após 15 min, 1 h, 6 h, 24 h e 48 h). Depois disso, a consulta automática é encerrada.</p>
@@ -140,7 +140,7 @@
 <li><strong>Supabase</strong> (operador: banco de dados, autenticação e funções de servidor). Servidores nos <strong>Estados Unidos</strong> (região East US – Ohio). Política: <a href="https://supabase.com/privacy">supabase.com/privacy</a>.</li>
 <li><strong>SEFAZ</strong> (Secretaria da Fazenda do estado emissor): para obter os dados da nota, o servidor do Kuanto consulta o site público da SEFAZ com os dados do próprio QR Code (chave de acesso e parâmetros impressos nele). Aceitamos apenas endereços de SEFAZ em <code>*.gov.br</code>.</li>
 <li><strong>Google</strong> (só se você usar "Continuar com Google"): faz o login e nos informa nome, e-mail, foto de perfil e o identificador da conta. O Google fica sabendo que você entrou no Kuanto. Política: <a href="https://policies.google.com/privacy">policies.google.com/privacy</a>.</li>
-<li><strong>OpenStreetMap Nominatim</strong>: recebe apenas o endereço público da loja (ver seção 3).</li>
+<li><strong>Photon (Komoot, dados do OpenStreetMap) e BrasilAPI</strong>: recebem apenas o endereço público da loja (ver seção 3).</li>
 <li><strong>OpenStreetMap (mapas)</strong>: as imagens do mapa são baixadas pelo app dos servidores do OpenStreetMap, que, como qualquer site, recebem o endereço IP do aparelho e a região do mapa exibida. Política: <a href="https://wiki.osmfoundation.org/wiki/Privacy_Policy">osmfoundation.org/wiki/Privacy_Policy</a>.</li>
 </ul>
 <p>Não vendemos, alugamos nem cedemos dados pessoais para publicidade.</p>
