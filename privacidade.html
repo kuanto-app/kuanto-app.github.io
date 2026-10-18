@@ -90,6 +90,12 @@
 <td>Supabase, vinculadas à sua conta. Enquanto a conta existir</td>
 </tr>
 <tr>
+<td><strong>Código de barras que você associar</strong> a um produto (“Qual destes produtos é este?” no Conferir preço)</td>
+<td>quando você lê o código de um produto que o Kuanto ainda não conhecia</td>
+<td>ligar o código ao produto para todos os usuários (o código passa a fazer parte do catálogo)</td>
+<td>Supabase: o código fica no produto; um registro de quem associou, quando e qual código, para corrigir associações erradas. Se você excluir a conta, o registro deixa de apontar para você e o código continua no produto</td>
+</tr>
+<tr>
 <td><strong>Categorias que você escolher</strong> para um produto (“Alterar” na tela do produto)</td>
 <td>quando você troca a categoria de um produto</td>
 <td>mostrar seus gastos por categoria do seu jeito</td>
@@ -141,6 +147,7 @@
 <li><strong>SEFAZ</strong> (Secretaria da Fazenda do estado emissor): para obter os dados da nota, o servidor do Kuanto consulta o site público da SEFAZ com os dados do próprio QR Code (chave de acesso e parâmetros impressos nele). Aceitamos apenas endereços de SEFAZ em <code>*.gov.br</code>.</li>
 <li><strong>Google</strong> (só se você usar "Continuar com Google"): faz o login e nos informa nome, e-mail, foto de perfil e o identificador da conta. O Google fica sabendo que você entrou no Kuanto. Política: <a href="https://policies.google.com/privacy">policies.google.com/privacy</a>.</li>
 <li><strong>Photon (Komoot, dados do OpenStreetMap) e BrasilAPI</strong>: recebem apenas o endereço público da loja (ver seção 3).</li>
+<li><strong>Open Food Facts</strong> (base aberta de produtos): quando você associa um código de barras, o servidor consulta só o código, para conferir o nome do produto. Nenhum dado seu é enviado.</li>
 <li><strong>OpenStreetMap (mapas)</strong>: as imagens do mapa são baixadas pelo app dos servidores do OpenStreetMap, que, como qualquer site, recebem o endereço IP do aparelho e a região do mapa exibida. Política: <a href="https://wiki.osmfoundation.org/wiki/Privacy_Policy">osmfoundation.org/wiki/Privacy_Policy</a>.</li>
 </ul>
 <p>Não vendemos, alugamos nem cedemos dados pessoais para publicidade.</p>
