@@ -49,7 +49,7 @@
 </a>
 <main>
 <h1>Política de Privacidade — Kuanto</h1>
-<p><strong>Última atualização:</strong> 19 de outubro de 2026</p>
+<p><strong>Última atualização:</strong> 26 de outubro de 2026</p>
 <p>O Kuanto é um aplicativo que lê o QR Code de notas fiscais de consumidor (NFC-e) de supermercados e usa os preços dessas notas para mostrar onde a sua lista de compras sai mais barata. Esta política explica, em linguagem direta, quais dados o app trata, por quê, onde ficam e como você pode apagá-los, nos termos da Lei Geral de Proteção de Dados (LGPD, Lei 13.709/2018).</p>
 <p><strong>Controlador:</strong> George Rocha (desenvolvedor independente, pessoa física) — contato e encarregado (DPO): <strong>georgebezs@gmail.com</strong>.</p>
 
@@ -81,7 +81,7 @@
 <td><strong>Arquivo da nota na SEFAZ</strong> (XML) e <strong>conteúdo do QR Code</strong></td>
 <td>ao consultar a nota na SEFAZ</td>
 <td>conferir que a nota é verdadeira e reprocessá-la se preciso</td>
-<td>Supabase, vinculado à sua conta. <strong>Antes de guardar</strong>, removemos do XML o destinatário (<code>&lt;dest&gt;</code>: CPF, nome e endereço do consumidor), o pagamento (<code>&lt;pag&gt;</code>: dados do cartão e da autorização), as observações (<code>&lt;infAdic&gt;</code>, onde a loja às vezes escreve nomes) e os autorizados (<code>&lt;autXML&gt;</code>); do QR Code, o CPF do consumidor (<code>cDest</code>). O conteúdo do QR Code fica guardado <strong>só enquanto a nota espera a SEFAZ</strong> (nota em contingência, até 48 h) e é apagado quando ela é confirmada ou desiste</td>
+<td>Supabase, vinculado à sua conta. <strong>Antes de guardar</strong>, removemos do XML o destinatário (<code>&lt;dest&gt;</code>: CPF, nome e endereço do consumidor), o pagamento (<code>&lt;pag&gt;</code>: dados do cartão e da autorização), as observações (<code>&lt;infAdic&gt;</code>, onde a loja às vezes escreve nomes) e os autorizados (<code>&lt;autXML&gt;</code>); do QR Code, o CPF do consumidor (<code>cDest</code>). O conteúdo do QR Code fica guardado <strong>só enquanto a nota espera a SEFAZ</strong> (nota que a SEFAZ ainda não mostra: no máximo cerca de 80 horas — 3 dias e 8 horas — contadas do scan) e é apagado quando ela é confirmada ou desiste</td>
 </tr>
 <tr>
 <td><strong>Listas de compras</strong></td>
@@ -100,6 +100,12 @@
 <td>quando você troca a categoria de um produto</td>
 <td>mostrar seus gastos por categoria do seu jeito</td>
 <td>Supabase, vinculadas à sua conta e visíveis só para você. Enquanto a conta existir</td>
+</tr>
+<tr>
+<td><strong>Registro técnico das consultas à SEFAZ</strong></td>
+<td>a cada consulta da nota à SEFAZ (no scan e nas consultas automáticas)</td>
+<td>medir quanto tempo as notas levam para aparecer na SEFAZ e achar falhas na consulta</td>
+<td>Supabase, só o servidor lê: a nota, o resultado (código e status HTTP), o motivo da espera e quando. Sem QR Code, sem chave de acesso, sem CPF, sem e-mail. Não é feito para compras de farmácia. Apagado junto com a nota e, de qualquer forma, depois de <strong>90 dias</strong></td>
 </tr>
 <tr>
 <td><strong>Versão do app instalada</strong> (ex.: 1.1.5) e se é Android ou iPhone</td>
@@ -129,12 +135,12 @@
 </table>
 
 <h3>Compras de farmácia e medicamentos</h3>
-<p>Remédio é dado de saúde (dado pessoal sensível, LGPD art. 5º, II). Quando a nota é de farmácia ou drogaria, ou tem algum medicamento (código fiscal NCM do capítulo 30), <strong>nada dessa compra fica na sua conta</strong>: a loja, os itens e o total ficam <strong>só no seu celular</strong>. Se a nota foi verificada na SEFAZ, os preços dos produtos entram na base de preços como uma <strong>nota anônima</strong>: sem ligação com nenhuma conta, sem a chave e o número da nota, e com a data só até a semana (sem dia nem hora). Ninguém, nem nós, consegue saber pelo banco de dados quem fez essa compra. Para não registrar a mesma nota duas vezes, o servidor guarda um código derivado da chave com um segredo (não dá para voltar à chave). Os preços anônimos continuam na base mesmo se você excluir a conta, porque não são ligados a ela. No celular, essas compras ficam <strong>criptografadas</strong> (AES-256), com a chave no cofre do aparelho (Android Keystore / iOS Keychain). Se você trocar de celular ou reinstalar o app, essas compras não voltam.</p>
+<p>Remédio é dado de saúde (dado pessoal sensível, LGPD art. 5º, II). Quando a nota é de farmácia ou drogaria, ou tem algum medicamento (código fiscal NCM do capítulo 30), <strong>nada dessa compra fica na sua conta</strong>: a loja, os itens e o total ficam <strong>só no seu celular</strong>. Se a nota foi verificada na SEFAZ, os preços dos produtos entram na base de preços como uma <strong>nota anônima</strong>: sem ligação com nenhuma conta, sem a chave e o número da nota, e com a data só até a semana (sem dia nem hora). Ninguém, nem nós, consegue saber pelo banco de dados quem fez essa compra. Para não registrar a mesma nota duas vezes, o servidor guarda um código derivado da chave com um segredo (não dá para voltar à chave). Os preços anônimos continuam na base mesmo se você excluir a conta, porque não são ligados a ela. No celular, essas compras ficam <strong>criptografadas</strong> (AES-256), com a chave no cofre do aparelho (Android Keystore / iOS Keychain). Se você trocar de celular ou reinstalar o app, essas compras não voltam. Se a nota de farmácia ainda não estiver disponível na SEFAZ, ela espera a confirmação <strong>sem nenhuma ligação com a sua conta</strong>: guardamos só o QR Code e a hora da leitura, para consultar a SEFAZ de novo, e apagamos os dois quando a nota é confirmada ou quando a consulta automática termina (cerca de 80 horas depois da leitura).</p>
 <h3>O que <strong>não</strong> guardamos e não coletamos</h3>
 <ul>
 <li><strong>Nome e endereço de pessoas.</strong> Não guardamos seu nome nem seu endereço (nem os que vêm do Google ou da nota fiscal).</li>
 <li><strong>Dados de pagamento.</strong> Bandeira, autorização e dados do cartão que vêm na nota são apagados antes de guardar.</li>
-<li><strong>CPF.</strong> O CPF não é armazenado: ele é retirado do XML e do QR Code antes de guardar. Única exceção: em nota emitida em contingência, o QR Code novo (versão 3) pode trazer o CPF dentro dele, e ele não pode ser alterado sem invalidar a consulta à SEFAZ; nesse caso o QR fica guardado só enquanto a nota espera a SEFAZ (no máximo 48 h) e é apagado em seguida. No modo foto, o texto enviado ao servidor pode conter a linha "CONSUMIDOR CPF" impressa na nota; esse texto é lido em memória só para extrair os itens e é descartado, sem ser armazenado.</li>
+<li><strong>CPF.</strong> O CPF não é armazenado: ele é retirado do XML e do QR Code antes de guardar. Única exceção: em nota emitida em contingência, o QR Code novo (versão 3) pode trazer o CPF dentro dele, e ele não pode ser alterado sem invalidar a consulta à SEFAZ; nesse caso o QR fica guardado só enquanto a nota espera a SEFAZ (no máximo cerca de 80 horas contadas do scan) e é apagado em seguida. No modo foto, o texto enviado ao servidor pode conter a linha "CONSUMIDOR CPF" impressa na nota; esse texto é lido em memória só para extrair os itens e é descartado, sem ser armazenado.</li>
 <li><strong>Fotos.</strong> Nenhuma foto é enviada ao servidor.</li>
 <li><strong>Localização em segundo plano.</strong> O app só usa a localização enquanto está aberto, e ela não é guardada.</li>
 <li>Contatos, fotos da galeria, outros apps instalados, identificadores de publicidade.</li>
@@ -149,7 +155,7 @@
 <p>A posição de cada loja no mapa é obtida pelo <strong>endereço público da loja impresso na nota</strong>, consultado no serviço Photon (da Komoot, com dados do OpenStreetMap) e, se ele não achar, na BrasilAPI pelo CEP. A esses serviços é enviado <strong>apenas o endereço da loja</strong> — nenhum dado seu. A sua localização <strong>nunca</strong> é usada como posição da loja.</p>
 
 <h2>4. Notas em contingência</h2>
-<p>Se a nota ainda não estiver disponível na SEFAZ (emitida em contingência), guardamos a chave de acesso e o servidor consulta a SEFAZ de novo automaticamente por cerca de 3 dias (após 15 min, 1 h, 6 h, 24 h e 48 h). Depois disso, a consulta automática é encerrada.</p>
+<p>Se a nota ainda não estiver disponível na SEFAZ (a SEFAZ demora para mostrá-la, ou ela foi emitida em contingência e a loja ainda não a enviou), guardamos a chave de acesso e o QR Code e o servidor consulta a SEFAZ de novo automaticamente: 15 minutos, 1h15 e 7h15 depois do scan e, a seguir, a cada 6 horas, até cerca de 79 horas (3 dias e 7 horas) depois do scan. Se a SEFAZ responder que o QR Code completo é inválido, conferimos mais uma vez cerca de 6 horas depois e encerramos. Se a SEFAZ estiver fora do ar na última consulta, tentamos mais uma vez 30 minutos depois antes de encerrar. Quando a consulta automática é encerrada, o QR Code é apagado.</p>
 
 <h2>5. Com quem os dados são compartilhados</h2>
 <ul>
